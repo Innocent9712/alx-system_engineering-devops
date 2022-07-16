@@ -1,0 +1,1 @@
+This directory contains image files to confirm that the ALX optional task on command line operations was completed.
