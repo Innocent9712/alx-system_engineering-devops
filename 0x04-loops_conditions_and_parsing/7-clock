@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# print hours and minuites for 12 hours
+
 i=0
 while [ $i -le 12 ]
 do 

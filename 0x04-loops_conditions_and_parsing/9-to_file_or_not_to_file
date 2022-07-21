@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# check different properties of a file
+
 file="school"
 if [ -e "$file" ]
 then
