@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# Display text indefinately and sleep for 2 seconds inbetween
+# Terminate the process for 4-to_infinity_and_beyond. Don't use kill or killall
 pkill -f 4-to_infinity
