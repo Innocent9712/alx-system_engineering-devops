@@ -1,5 +1,6 @@
+# Create a file school in /tmp
+
 file { 'school':
-  ensure  => 'present',
   path    => '/tmp/school',
   owner   => 'www-data',
   group   => 'www-data',
