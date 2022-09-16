@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# script to ssh into my alx server
+
+ssh ubuntu@34.236.187.99
