@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 # Script to setup an nginx server
 index_file=/var/www/html/index.nginx-debian.html
-sudo service nginx status
-if ! [[ $? -eq 0 ]]; then
-    sudo apt update
-    sudo apt install nginx
-fi
+sudo apt update
+sudo apt install nginx
 sudo ufw allow 'Nginx HTTP'
-sudo chmod a+w $index_file && sudo echo "Hello World!" > $index_file &&
-sudo chmod 644 $index_file
+echo "Hello World!" | sudo tee $index_file
 sudo service nginx restart

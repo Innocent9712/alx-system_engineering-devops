@@ -4,7 +4,7 @@ index_file=/var/www/html/index.nginx-debian.html
 default_web=/etc/nginx/sites-available/default
 sudo apt update
 sudo apt install nginx -y
-sudo chmod a+w $index_file && sudo echo "Hello World!" > $index_file &&
+echo "Hello World!" | sudo tee $index_file &&
 sudo chmod 644 $index_file
 sudo chmod a+w $default_web &&
 sudo sed -i '/server_name _;/a\\n\tlocation /redirect_me {\n\t\trewrite ^/redirect_me https://google.com permanent;\n\t}\n' $default_web &&
