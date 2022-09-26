@@ -2,6 +2,8 @@
 #Install and configure HAProxy
 
 sudo apt update
+sudo apt-get install --no-install-recommends software-properties-common -y
+sudo add-apt-repository ppa:vbernat/haproxy-2.6 -y
 sudo apt install haproxy -y
 haproxy=/etc/default/haproxy
 echo "ENABLED=1" | sudo tee -a $haproxy
