@@ -23,7 +23,7 @@ if __name__ == "__main__":
         if task.get('completed'):
             done += 1
     print("({}/{}):".format(done, len(res)))
-    [print("\t{}".format(task.get('title')))
+    [print("\t {}".format(task.get('title')))
         if task.get('completed') else "" for task in res]
 
     # for task in res:
