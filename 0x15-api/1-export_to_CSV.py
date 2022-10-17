@@ -5,12 +5,14 @@ to export data in the CSV format.
 
 from fileinput import filename
 import requests
+import csv
 from sys import argv
 
 if __name__ == "__main__":
     try:
-        url = "https://jsonplaceholder.typicode.com/users/{}".format(argv[1])
-        file_name = "{}.csv".format(argv[1])
+        user_id = argv[1]
+        url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
+        file_name = "{}.csv".format(user_id)
     except IndexError:
         exit
 
@@ -20,10 +22,12 @@ if __name__ == "__main__":
     res = requests.get(url + "/todos")
     res = res.json()
 
-    for task in res:
-        with open(file_name, "a+") as f:
-            f.write('"{}","{}","{}","{}"\n'.format(
-                                                argv[1],
-                                                user_name,
-                                                task.get('completed'),
-                                                task.get('title')))
+    with open(file_name, "w") as f:
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+        for task in res:
+            writer.writerow([
+                user_id,
+                user_name,
+                task.get('completed'),
+                task.get('title')
+            ])
