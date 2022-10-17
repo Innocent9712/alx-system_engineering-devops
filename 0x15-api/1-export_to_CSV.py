@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     res = requests.get(url)
     res = res.json()
-    user_name = "{}".format(res.get('name'))
+    user_name = "{}".format(res.get('username'))
     res = requests.get(url + "/todos")
     res = res.json()
 
