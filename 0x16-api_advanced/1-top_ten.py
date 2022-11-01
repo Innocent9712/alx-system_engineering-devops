@@ -1,28 +1,22 @@
 #!/usr/bin/python3
-"""Write a function that queries the Reddit API
-and prints the titles of the first 10 hot posts
-listed for a given subreddit.
 """
-from json import JSONDecodeError
+Contains the top_ten function
+"""
+
 import requests
 
 
 def top_ten(subreddit):
-    """Function to get the top 10 post in the subreddit"""
-    if type(subreddit) is not str or subreddit is None:
+    """prints the titles of the top ten hot posts for a given subreddit"""
+    if subreddit is None or type(subreddit) is not str:
         print(None)
-        return
-    try:
-        res = requests.get("https://www.reddit.com/r/{}/hot.json"
-                           .format(subreddit), allow_redirects=False,
-                           headers={'User-Agent': 'My User Agent 1.0'},
-                           params={'limit': 10}).json()
-    except JSONDecodeError:
-        return print(None)
-    top = res.get('data', {}).get('children', [])
-    if len(top) > 0 and top[0].get('kind') != 't3':
+    r = requests.get('http://www.reddit.com/r/{}/hot.json'.format(subreddit),
+                     headers={'User-Agent': 'Python/requests:APIproject:\
+                     v1.0.0 (by /u/aaorrico23)'},
+                     params={'limit': 10}).json()
+    posts = r.get('data', {}).get('children', None)
+    if posts is None or (len(posts) > 0 and posts[0].get('kind') != 't3'):
         print(None)
-        return
-    # for post in top:
-    #     print (post.get('data', {}).get('title', ''))
-    return [print(post.get('data', {}).get('title', None)) for post in top]
+    else:
+        for post in posts:
+            print(post.get('data', {}).get('title', None))
