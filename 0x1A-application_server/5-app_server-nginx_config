@@ -1,0 +1,39 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name 34.236.187.99;
+
+        error_page 404 /error.html;
+        add_header X-Served-By 9058-web-01;
+
+        location ~ ^\/static\/(.*)\.(css|js|png) {
+#               rewrite ^/static/(.*)\?(.*)$ /static/$1;
+                proxy_pass http://0.0.0.0:5003;
+        }
+#       location ~ \.(css|js|png)$ {
+#                root ~/AirBnB_clone_v4/web_dynamic/static;
+#       }
+        location / {
+                proxy_pass http://0.0.0.0:5003/2-hbnb;
+                #try_files $uri $uri/ =404;
+        }
+
+        location /api/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5002;
+        }
+        location /airbnb-onepage/ {
+                alias ~/AirBnB_clone_v2/;
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5000;
+        }
+        location ~ ^/airbnb-dynamic/number_odd_or_even/([0-9]*)$ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;
+        }
+}
